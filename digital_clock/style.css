@@ -1,0 +1,16 @@
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #111;
+      color: rgb(138, 198, 218);
+      font-family: monospace;
+      font-size: 3rem;
+    }
+    #clock {
+      padding: 20px 40px;
+      border: 2px solid rgb(136, 35, 126);
+      border-radius: 10px;
+    }
