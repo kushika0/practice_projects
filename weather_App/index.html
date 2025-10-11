@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Weather App</title>
+  <style>
+    body {
+      font-family: Arial;
+      background: #b3e5fc;
+      text-align: center;
+      margin-top: 100px;
+    }
+    input, button {
+      padding: 10px;
+      margin: 5px;
+      border-radius: 5px;
+      border: none;
+    }
+    button {
+      background: #0288d1;
+      color: white;
+      cursor: pointer;
+    }
+    #result {
+      margin-top: 20px;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <h2>🌤️ Simple Weather App</h2>
+  <input type="text" id="city" placeholder="Enter city name">
+  <button onclick="getWeather()">Get Weather</button>
+
+  <div id="result"></div>
+
+  <script>
+    async function getWeather() {
+      const city = document.getElementById('city').value;
+      const result = document.getElementById('result');
+
+      if (!city) {
+        result.innerHTML = "Please enter a city name!";
+        return;
+      }
+           
+      //Api
+      const url = `https://wttr.in/${city}?format=j1`;
+
+      try {
+        const res = await fetch(url);
+        const data = await res.json();
+
+        const area = data.nearest_area[0].areaName[0].value;
+        const temp = data.current_condition[0].temp_C;
+        const desc = data.current_condition[0].weatherDesc[0].value;
+
+        result.innerHTML = `
+          <h3>${area}</h3>
+          <p>🌡️ Temperature: ${temp}°C</p>
+          <p>☁️ Condition: ${desc}</p>
+        `;
+      } catch (error) {
+        result.innerHTML = "Error fetching data!";
+      }
+    }
+  </script>
+</body>
+</html>
