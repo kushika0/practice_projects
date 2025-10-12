@@ -1,0 +1,48 @@
+body {
+  background-color: #f7f7f7;
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.bill_generator {
+  background: white;
+  padding: 20px;
+  width: 280px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #ccc;
+  text-align: center;
+}
+
+input {
+  margin: 10px 0;
+  padding: 8px;
+  width: 90%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background: #007bff;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #0056b3;
+}
+
+.result {
+  margin-top: 15px;
+  text-align: left;
+}
+
+.result p {
+  margin: 5px 0;
+  font-size: 16px;
+}
