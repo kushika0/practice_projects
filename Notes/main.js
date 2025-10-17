@@ -12,6 +12,7 @@ function showNotes() {
     noteDiv.innerHTML = `
       <textarea>${note}</textarea>
       <div class="btns">
+      
         <button onclick="deleteNote(${index})">🗑️</button>
         <button onclick="updateNote(${index})">💾</button>
       </div>
@@ -20,7 +21,7 @@ function showNotes() {
   });
 }
 
-// Add new note
+// Add new note button
 addBtn.addEventListener("click", () => {
   const text = noteText.value.trim();
   if (text === "") return alert("Please write something!");
@@ -31,7 +32,7 @@ addBtn.addEventListener("click", () => {
   showNotes();
 });
 
-// Delete note
+// Delete note button
 function deleteNote(index) {
   const notes = JSON.parse(localStorage.getItem("notes")) || [];
   notes.splice(index, 1);
@@ -39,7 +40,7 @@ function deleteNote(index) {
   showNotes();
 }
 
-// Update note (save edited text)
+// Update note button
 function updateNote(index) {
   const notes = JSON.parse(localStorage.getItem("notes")) || [];
   const updatedText = document.querySelectorAll(".note textarea")[index].value;
