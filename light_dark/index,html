@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Light/Dark Mode Toggle</title>
+  <style>
+    /* 🌞 Light mode (default) */
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f7f7f7;
+      color: #222;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      transition: background 0.4s, color 0.4s;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      background-color: #222;
+      color: #fff;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    button:hover {
+      background-color: #555;
+    }
+
+    /* 🌙 Dark mode styles */
+    .dark-mode {
+      background-color: #1a1a1a;
+      color: #f7f7f7;
+    }
+
+    .dark-mode button {
+      background-color: #f7f7f7;
+      color: #222;
+    }
+
+    .dark-mode button:hover {
+      background-color: #ccc;
+    }
+  </style>
+</head>
+<body>
+  <h1>Light / Dark Mode 🌗</h1>
+  <button id="toggle-btn">Switch to Dark Mode</button>
+
+  <script>
+    const toggleBtn = document.getElementById("toggle-btn");
+    const body = document.body;
+
+    // Check and apply saved theme from localStorage
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "dark") {
+      body.classList.add("dark-mode");
+      toggleBtn.textContent = "Switch to Light Mode";
+    }
+
+    // Toggle theme on button click
+    toggleBtn.addEventListener("click", () => {
+      body.classList.toggle("dark-mode");
+
+      if (body.classList.contains("dark-mode")) {
+        toggleBtn.textContent = "Switch to Light Mode";
+        localStorage.setItem("theme", "dark");
+      } else {
+        toggleBtn.textContent = "Switch to Dark Mode";
+        localStorage.setItem("theme", "light");
+      }
+    });
+  </script>
+</body>
+</html>
