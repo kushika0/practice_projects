@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Typing Speed Test</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f2f5;
+      padding: 40px;
+      margin: 0;
+    }
+
+    .container {
+      width: 700px;
+      margin: auto;
+      background: white;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+
+    #quote {
+      font-size: 22px;
+      margin-bottom: 20px;
+      line-height: 1.5;
+      border-left: 4px solid #007bff;
+      padding-left: 15px;
+    }
+
+    #input {
+      width: 100%;
+      padding: 12px;
+      font-size: 18px;
+      border: 2px solid #bbb;
+      border-radius: 5px;
+      outline: none;
+    }
+
+    #input:focus {
+      border-color: #007bff;
+    }
+
+    .stats {
+      margin-top: 20px;
+      font-size: 20px;
+    }
+
+    button {
+      padding: 10px 15px;
+      font-size: 16px;
+      border: none;
+      margin-top: 20px;
+      background: #007bff;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <h2>Typing Speed Test</h2>
+
+    <div id="quote"></div>
+
+    <input id="input" type="text" placeholder="Start typing here..." disabled />
+
+    <div class="stats">
+      Time Left: <span id="time">60</span> sec  
+      <br>
+      WPM: <span id="wpm">0</span>
+      <br>
+      Accuracy: <span id="accuracy">0</span>%
+    </div>
+
+    <button onclick="startTest()">Start Test</button>
+  </div>
+
+  <script>
+    const quotes = [
+      "The quick brown fox jumps over the lazy dog.",
+      "JavaScript makes web pages interactive and dynamic.",
+      "Practice typing daily to increase your typing speed.",
+      "A journey of a thousand miles begins with a single step.",
+      "Learning to code opens many opportunities in life."
+    ];
+
+    let timer = 60;
+    let interval = null;
+    let correctChars = 0;
+    let totalTypedChars = 0;
+    let currentQuote = "";
+
+    const quoteEl = document.getElementById("quote");
+    const input = document.getElementById("input");
+    const timeEl = document.getElementById("time");
+    const wpmEl = document.getElementById("wpm");
+    const accuracyEl = document.getElementById("accuracy");
+
+    function startTest() {
+      // reset everything
+      timer = 60;
+      correctChars = 0;
+      totalTypedChars = 0;
+      input.value = "";
+      input.disabled = false;
+      input.focus();
+
+      // load random quote
+      currentQuote = quotes[Math.floor(Math.random() * quotes.length)];
+      quoteEl.innerText = currentQuote;
+
+      // start timer
+      clearInterval(interval);
+      interval = setInterval(updateTimer, 1000);
+    }
+
+    function updateTimer() {
+      if (timer > 0) {
+        timer--;
+        timeEl.innerText = timer;
+      } else {
+        finishTest();
+      }
+    }
+
+    input.addEventListener("input", () => {
+      const typed = input.value;
+      totalTypedChars++;
+
+      if (currentQuote.startsWith(typed)) {
+        correctChars++;
+      }
+
+      // update WPM (WPM = correct characters / 5 / minutes)
+      const timeUsed = (60 - timer) / 60;
+      const wpm = Math.round((correctChars / 5) / timeUsed || 0);
+      wpmEl.innerText = wpm;
+
+      // update accuracy
+      const accuracy = Math.round((correctChars / totalTypedChars) * 100);
+      accuracyEl.innerText = accuracy || 0;
+    });
+
+    function finishTest() {
+      clearInterval(interval);
+      input.disabled = true;
+    }
+  </script>
+
+</body>
+</html>
